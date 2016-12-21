@@ -12,21 +12,30 @@ class GridTest < Minitest::Test
   end
 
   def test_coordinates_can_be_printed_to_screen
+    skip
     grid = Grid.new
     grid.print_layout
   end
 
-  def test_coordinates_can_print_to_screen
+  # def test_coordinates_start_at_
+  #   cp_input = ['A1']
+  #   player_input = ['C1']
+  #   my_grid = Grid.new
+  #   my_grid.replace_with_hit_or_miss(cp_input, player_input)
+  #
+  #   assert_equal 'X', my_grid.grid['A1']
+  # end
+
+
+  def test_coordinates_are_replaced_hit_or_miss_if_guessed
+    cp_input = ['A1']
+    player_input = ['C1']
+    my_grid = Grid.new
+    my_grid.replace_with_hit_or_miss(cp_input, player_input)
+
+    assert_equal 'X', my_grid.grid['A1']
   end
 
-  def test_coordinates_are_replaced_by_spacers
-  end
-
-  def test_cp_choices_can_print_to_screen
-    skip
-    cp = ComputerPlayer.new
-    cp.make_choices("A1", "B1")
-  end
 
 end
 

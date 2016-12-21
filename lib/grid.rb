@@ -1,7 +1,9 @@
 require './lib/computer_player'
+require './lib/player'
 
 class Grid
 
+  attr_reader :grid
 
   def initialize
     @grid = { "A1" =>  "-",  "A2"=>"-", "A3"=>"-", "A4"=>  "-",
@@ -21,6 +23,37 @@ class Grid
     end
   end
 
+  def add_coordinate_to_grid(owner_letter, coordinates)
+    # binding.pry
+    @grid.each do |coord_in_grid,spacer|
+      coordinates.each do |coordinate|
+        if coord_in_grid == coordinate
+          @grid[coord_in_grid] = owner_letter
+        end
+      end
+    end
+    print_layout
+  end
+
+  def replace_with_hit_or_miss(cp_input, player_input)
+    # binding.pry
+    @grid.each do |k,i|
+      # binding.pry
+      if cp_input[0] == k
+        @grid[k] = "X"
+      elsif cp_input[0] != k
+        binding.pry
+        @grid[k] = "M"
+      elsif player_input[0] == k
+        @grid[k] = "X"
+      elsif player_input[0] != k
+        @grid[k] = "M"
+      else cp_input[0] == nil || player_input[0] == nil
+        @grid[k]
+      end
+    end
+    print_layout
+  end
 
 end
 

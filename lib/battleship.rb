@@ -10,7 +10,7 @@ until input == "Q" do
   elsif input == "I"
     #go to the unstructions
   else
-    puts "enter something real, ho"
+    puts "enter something real"
   end
   break
 end
