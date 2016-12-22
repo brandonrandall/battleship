@@ -14,7 +14,6 @@ class PlayerTest < Minitest::Test
 
   def test_player_places_a_one_by_one_tugboat
     skip
-    #test hp can choose 2 coordinates to place first ship
     player = Player.new
     player_player.place_coordinate(["D3"])
     assert_equal 'H', player.player_choice('D3')
@@ -30,6 +29,7 @@ class PlayerTest < Minitest::Test
   end
 
   def test_player_has_to_make_chained_choices
+    skip
     player = Player.new
     cp = ComputerPlayer.new
 
@@ -48,4 +48,24 @@ class PlayerTest < Minitest::Test
     assert_equal 'H', player.player_choice('A2')
 
   end
+
+  def test_coordinates_are_replaced_hit_or_miss_if_guessed
+    cp = ComputerPlayer.new
+    player = Player.new
+
+    cp.place_ship1(["D3", "D4"])
+    cp.place_ship2(["A3", "B3", "C3"])
+
+    player.place_ship1(["A3", "A2"])
+    player.place_ship2(["D2", "D3", "D4"])
+
+    cp_input = ['A1']
+    player_input = ['C3']
+    player.computer_guess(cp_input)
+    cp.player_guess(player_input)
+
+    cp.printable_enemy_grid
+    player.print_grid_of_player
+  end
+
 end

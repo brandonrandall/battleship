@@ -1,4 +1,5 @@
 require './lib/grid'
+require './lib/player'
 
 class ComputerPlayer
 
@@ -38,7 +39,6 @@ class ComputerPlayer
   end
 
   def computer_choice(coordinates)
-    # binding.pry
     computer_grid.grid[coordinates]
   end
 

@@ -35,14 +35,6 @@ class Player
       @printable_grid.print_layout
     end
 
-    # def place_ship1(coordinate)
-    #   @cp.computer_grid.add_coordinate_to_grid("H", coordinate)
-    # end
-    #
-    # def place_ship2(coordinate)
-    #   @cp.computer_grid.add_coordinate_to_grid("H", coordinate)
-    # end
-
     def player_choice(coordinates)
       @player_grid.grid[coordinates]
     end
