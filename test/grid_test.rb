@@ -28,12 +28,32 @@ class GridTest < Minitest::Test
 
 
   def test_coordinates_are_replaced_hit_or_miss_if_guessed
-    cp_input = ['A1']
-    player_input = ['C1']
-    my_grid = Grid.new
-    my_grid.replace_with_hit_or_miss(cp_input, player_input)
+    # skip
 
-    assert_equal 'X', my_grid.grid['A1']
+    cp = ComputerPlayer.new
+    player = Player.new
+
+    cp.place_ship1(["D3", "D4"])
+    cp.place_ship2(["A3", "B3", "C3"])
+
+    player.place_ship1(["A3", "A2"])
+    player.place_ship2(["D2", "D3", "D4"])
+
+    cp_input = ['A1']
+    player_input = ['C3']
+    player.computer_guess(cp_input)
+    cp.player_guess(player_input)
+    # my_grid = Grid.new
+    # my_grid.replace_with_hit_or_miss(cp_input, player_input)
+
+    player.print_grid_of_player
+    cp.print_grid_of_computer
+    player.printable_enemy_grid
+    cp.printable_enemy_grid
+
+
+
+    # assert_equal 'M', my_grid.grid['A1']
   end
 
 

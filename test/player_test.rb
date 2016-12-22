@@ -31,9 +31,15 @@ class PlayerTest < Minitest::Test
 
   def test_player_has_to_make_chained_choices
     player = Player.new
+    cp = ComputerPlayer.new
 
     player.place_ship1(["A3", "A2"])
     player.place_ship2(["D2", "D3", "D4"])
+    player.print_grid_of_player
+
+    cp.place_ship1(["D3", "D4"])
+    cp.place_ship2(["A3", "B3", "C3"])
+    cp.print_grid_of_computer
 
     assert_equal 'H', player.player_choice('D2')
     assert_equal 'H', player.player_choice('D3')

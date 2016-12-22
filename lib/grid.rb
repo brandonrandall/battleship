@@ -14,7 +14,7 @@ class Grid
 
   def print_layout
     letters = {0=>"A", 1=>"B", 2=>"C", 3=>"D"}
-    coordinates_1 = @grid.each_slice(4).map { |row| p row.to_h }
+    coordinates_1 = @grid.each_slice(4).map { |row| row.to_h }
     values = coordinates_1.map { |row| row.map { |k,v| v}}
     puts ". 1 2 3 4"
     @print = values.each_with_index do |row, i|
@@ -25,6 +25,7 @@ class Grid
 
   def add_coordinate_to_grid(owner_letter, coordinates)
     # binding.pry
+
     @grid.each do |coord_in_grid,spacer|
       coordinates.each do |coordinate|
         if coord_in_grid == coordinate
@@ -32,27 +33,31 @@ class Grid
         end
       end
     end
-    print_layout
   end
 
-  def replace_with_hit_or_miss(cp_input, player_input)
+  def replace_with_hit_or_miss(guess, printable_grid)
     # binding.pry
-    @grid.each do |k,i|
-      # binding.pry
-      if cp_input[0] == k
-        @grid[k] = "X"
-      elsif cp_input[0] != k
-        binding.pry
-        @grid[k] = "M"
-      elsif player_input[0] == k
-        @grid[k] = "X"
-      elsif player_input[0] != k
-        @grid[k] = "M"
-      else cp_input[0] == nil || player_input[0] == nil
-        @grid[k]
-      end
+    if @grid[guess[0]] == "H" || @grid[guess[0]] == "C"
+      printable_grid.grid[guess[0]] = "X"
+    elsif @grid[guess[0]] != "H" || @grid[guess[0]] != "C"
+      printable_grid.grid[guess[0]] = "M"
     end
-    print_layout
+
+    # @grid.each do |k,i|
+    #   if cp_input[0] == k || player_input[0] == k
+    #     @grid[k] = "X"
+    #   end
+
+      # if
+      # elsif player_input[0] == k
+      #   @grid[k] = "X"
+      # elsif player_input[0] != k
+      #   @grid[k] = "M"
+      # else cp_input[0] == nil || player_input[0] == nil
+      #   @grid[k]
+      # end
+    # end
+    # print_layout
   end
 
 end
