@@ -53,19 +53,45 @@ class PlayerTest < Minitest::Test
     cp = ComputerPlayer.new
     player = Player.new
 
-    cp.place_ship1(["D3", "D4"])
-    cp.place_ship2(["A3", "B3", "C3"])
+    cp.place_ship1
+    cp.place_ship2
 
     player.place_ship1(["A3", "A2"])
     player.place_ship2(["D2", "D3", "D4"])
 
-    cp_input = ['A1']
+    cp_input = ['A3']
     player_input = ['C3']
     player.computer_guess(cp_input)
     cp.player_guess(player_input)
 
+    player.printable_enemy_grid
     cp.printable_enemy_grid
     player.print_grid_of_player
+  end
+
+  def test_can_sink
+    cp = ComputerPlayer.new
+    player = Player.new
+
+    cp.place_ship1
+    cp.place_ship2
+
+    player.place_ship1(["A3", "A2"])
+    player.place_ship2(["D2", "D3", "D4"])
+
+    cp_input = ['A3']
+    player_input = ['B3']
+    cp_input = ['D3']
+    player_input = ['C3']
+    cp_input = ['A2']
+    player_input = ['D3']
+    player.computer_guess(cp_input)
+    cp.player_guess(player_input)
+
+    player.printable_enemy_grid
+    cp.printable_enemy_grid
+    player.print_grid_of_player
+
   end
 
 end

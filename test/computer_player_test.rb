@@ -59,19 +59,25 @@ class ComputerPlayerTest < Minitest::Test
     cp = ComputerPlayer.new
     player = Player.new
 
-    cp.place_ship1(["D3", "D4"])
-    cp.place_ship2(["A3", "B3", "C3"])
+    cp.computer_grid.grid["D3"] = "C"
+    cp.computer_grid.grid["D4"] = "C"
+
+    cp.computer_grid.grid["A1"] = "C"
+    cp.computer_grid.grid["B1"] = "C"
+    cp.computer_grid.grid["C1"] = "C"
+
 
     player.place_ship1(["A3", "A2"])
     player.place_ship2(["D2", "D3", "D4"])
 
     cp_input = ['A1']
-    player_input = ['C3']
+    player_input = ['C1']
+    
     player.computer_guess(cp_input)
     cp.player_guess(player_input)
 
     player.printable_enemy_grid
     cp.print_grid_of_computer
-
   end
+
 end

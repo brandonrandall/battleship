@@ -23,7 +23,18 @@ class Grid
     end
   end
 
+  def not_valid_coordinates?(coordinates)
+    invalid_coord = @grid.select { |key, value| value != "-" }.keys
+    coordinates.group_by do |coordinate|
+      # stopping place (figure out how to make this work.)m
+      invalid_coord.include?(coordinate)
+    end
+  end
+
   def add_coordinate_to_grid(owner_letter, coordinates)
+    value = not_valid_coordinates?(coordinates)
+    return valid[true] unless value[true].nil?
+    already_occupied_coordinates = []
     @grid.each do |coord_in_grid,spacer|
       coordinates.each do |coordinate|
         if coord_in_grid == coordinate
@@ -31,14 +42,14 @@ class Grid
         end
       end
     end
+    already_occupied_coordinates
   end
 
-  def replace_with_hit_or_miss(guess, printable_grid)
+  def replace_with_hit_miss_or_sunk(guess, printable_grid)
     if @grid[guess[0]] == "H" || @grid[guess[0]] == "C"
       printable_grid.grid[guess[0]] = "X"
     elsif @grid[guess[0]] != "H" || @grid[guess[0]] != "C"
       printable_grid.grid[guess[0]] = "M"
     end
   end
-
 end
