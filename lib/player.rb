@@ -15,8 +15,9 @@ class Player
       player_ships = @player_grid.grid.select { |key, value| value == "H"}.keys
       cp_guesses = @printable_grid.grid.select { |key, value| value == "X"}.keys
       if player_ships == cp_guesses
-        puts "GAME OVER, Computer won"
-        true
+        puts "
+        GAME OVER, Computer won
+        "
       else
         false
       end

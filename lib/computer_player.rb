@@ -16,19 +16,17 @@ class ComputerPlayer
   end
 
   def commencement
-    p "Ready to DIE?"
-    #computer places ships
     place_ship1(coordinate)
-    place_ship2()
-    #make random choices once per turn
+    place_ship2(coordinate)
   end
 
   def ships_sunk?
     cp_ships = @computer_grid.grid.select { |key, value| value == "C"}.keys
     player_guesses = @printable_grid.grid.select { |key, value| value == "X"}.keys
     if cp_ships == player_guesses
-      puts "GAME OVER, Player won"
-      true
+      puts "
+      GAME OVER, Player won
+      "
     else
       false
     end
@@ -77,6 +75,7 @@ class ComputerPlayer
     direction_on_axis = rand(2)
 
     if direction_on_axis == 0
+      binding.pry
       long_horiz_placement(long_horiz_array)
     else
       long_vert_placement(long_vert_array)
@@ -108,6 +107,7 @@ class ComputerPlayer
     # end
     # binding.pry
     start_index = @base_array.index(long_starting_point)
+    
     placement_spots = [ @base_array[start_index],
                         @base_array[start_index + 1],
                         @base_array[start_index + 2]]
@@ -119,8 +119,10 @@ class ComputerPlayer
   def long_vert_placement(vert_array)
     long_starting_point = vert_array.sample
     # until @computer_grid.grid[long_starting_point] == "-"
+    #   binding.pry
     #   long_starting_point = vert_array.sample
     # end
+    # binding.pry
     start_index = @base_array.index(long_starting_point)
     placement_spots = [ @base_array[start_index],
                         @base_array[start_index + 4],

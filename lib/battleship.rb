@@ -38,6 +38,9 @@ end
   def start_and_play_game
     until @cp.ships_sunk? || @player.ships_sunk?
       puts "
+      Computer and player have both placed ships
+      "
+      puts "
       PLAYER, MAKE A GUESS
       "
       @cp.printable_enemy_grid
