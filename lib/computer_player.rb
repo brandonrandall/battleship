@@ -75,7 +75,7 @@ class ComputerPlayer
     direction_on_axis = rand(2)
 
     if direction_on_axis == 0
-      binding.pry
+      # binding.pry
       long_horiz_placement(long_horiz_array)
     else
       long_vert_placement(long_vert_array)
@@ -107,7 +107,7 @@ class ComputerPlayer
     # end
     # binding.pry
     start_index = @base_array.index(long_starting_point)
-    
+
     placement_spots = [ @base_array[start_index],
                         @base_array[start_index + 1],
                         @base_array[start_index + 2]]
