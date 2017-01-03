@@ -1,4 +1,3 @@
-# test helper
 require './lib/computer_player'
 require './lib/player'
 require 'minitest/autorun'
@@ -21,7 +20,6 @@ class ComputerPlayerTest < Minitest::Test
 
   def test_computer_places_a_one_by_one_tugboat
     skip
-    #test cp can choose 2 coordinates to place first ship
     computer_player = ComputerPlayer.new
     computer_player.place_coordinate(["D3"])
     assert_equal 'C', computer_player.computer_choice('D3')
@@ -29,7 +27,6 @@ class ComputerPlayerTest < Minitest::Test
 
   def test_computer_places_a_ship
     skip
-    #test cp can choose 2 coordinates to place first ship
     computer_player = ComputerPlayer.new
     computer_player.place_coordinate(["D3", "D4"])
     assert_equal 'C', computer_player.computer_choice('D3')
@@ -37,20 +34,50 @@ class ComputerPlayerTest < Minitest::Test
   end
 
   def test_computer_player_has_to_make_chained_choices
-    # skip
-    computer_player = ComputerPlayer.new
+    skip
+    cp = ComputerPlayer.new
+    player = Player.new
 
-    computer_player.place_ship1(["D3", "D4"])
-    # computer_player.place_ship2(["A3", "B3", "C3"])
+    cp.place_ship1(["D3", "D4"])
+    cp.place_ship2(["A3", "B3", "C3"])
+    cp.print_grid_of_computer
 
-    assert_equal 'C', computer_player.computer_choice('D3')
-    assert_equal 'C', computer_player.computer_choice('D4')
-    assert_equal 'C', computer_player.computer_choice('A3')
-    assert_equal 'C', computer_player.computer_choice('B3')
-    assert_equal 'C', computer_player.computer_choice('C3')
+    player.place_ship1(["A3", "A2"])
+    player.place_ship2(["D2", "D3", "D4"])
+    player.print_grid_of_player
+
+    assert_equal 'C', cp.computer_choice('D3')
+    assert_equal 'C', cp.computer_choice('D4')
+    assert_equal 'C', cp.computer_choice('A3')
+    assert_equal 'C', cp.computer_choice('B3')
+    assert_equal 'C', cp.computer_choice('C3')
 
   end
 
+  def test_coordinates_are_replaced_hit_or_miss_if_guessed
+    # skip
+    cp = ComputerPlayer.new
+    player = Player.new
 
+    cp.computer_grid.grid["D3"] = "C"
+    cp.computer_grid.grid["D4"] = "C"
+
+    cp.computer_grid.grid["A1"] = "C"
+    cp.computer_grid.grid["B1"] = "C"
+    cp.computer_grid.grid["C1"] = "C"
+
+
+    player.place_ship1(["A3", "A2"])
+    player.place_ship2(["D2", "D3", "D4"])
+
+    cp_input = ['A1']
+    player_input = ['C1']
+    
+    player.computer_guess(cp_input)
+    cp.player_guess(player_input)
+
+    player.printable_enemy_grid
+    cp.print_grid_of_computer
+  end
 
 end

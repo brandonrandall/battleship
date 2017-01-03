@@ -14,7 +14,7 @@ class Grid
 
   def print_layout
     letters = {0=>"A", 1=>"B", 2=>"C", 3=>"D"}
-    coordinates_1 = @grid.each_slice(4).map { |row| p row.to_h }
+    coordinates_1 = @grid.each_slice(4).map { |row| row.to_h }
     values = coordinates_1.map { |row| row.map { |k,v| v}}
     puts ". 1 2 3 4"
     @print = values.each_with_index do |row, i|
@@ -23,8 +23,18 @@ class Grid
     end
   end
 
+  def not_valid_coordinates?(coordinates)
+    invalid_coord = @grid.select { |key, value| value != "-" }.keys
+    coordinates.group_by do |coordinate|
+      # stopping place (figure out how to make this work.)m
+      invalid_coord.include?(coordinate)
+    end
+  end
+
   def add_coordinate_to_grid(owner_letter, coordinates)
-    # binding.pry
+    value = not_valid_coordinates?(coordinates)
+    return valid[true] unless value[true].nil?
+    already_occupied_coordinates = []
     @grid.each do |coord_in_grid,spacer|
       coordinates.each do |coordinate|
         if coord_in_grid == coordinate
@@ -32,52 +42,14 @@ class Grid
         end
       end
     end
-    print_layout
+    already_occupied_coordinates
   end
 
-  def replace_with_hit_or_miss(cp_input, player_input)
-    # binding.pry
-    @grid.each do |k,i|
-      # binding.pry
-      if cp_input[0] == k
-        @grid[k] = "X"
-      elsif cp_input[0] != k
-        binding.pry
-        @grid[k] = "M"
-      elsif player_input[0] == k
-        @grid[k] = "X"
-      elsif player_input[0] != k
-        @grid[k] = "M"
-      else cp_input[0] == nil || player_input[0] == nil
-        @grid[k]
-      end
+  def replace_with_hit_miss_or_sunk(guess, printable_grid)
+    if @grid[guess[0]] == "H" || @grid[guess[0]] == "C"
+      printable_grid.grid[guess[0]] = "X"
+    elsif @grid[guess[0]] != "H" || @grid[guess[0]] != "C"
+      printable_grid.grid[guess[0]] = "M"
     end
-    print_layout
   end
-
 end
-
-
-  # def grid_layout
-  #   row = Array.new(4, "-")
-  #   rows_n_columns = row.map { |row| Array.new(4, "-")}
-  # end
-  #
-  # def id_creator
-  #   grid_layout
-  #   row_id = ("A".."D").to_a
-  #   column_id = (1..4).to_a
-  #
-  #   print "\t"
-  #   print row_id.join("\t")
-  #   puts
-  #   laid_out = grid_layout.each_with_index do |row, i|
-  #     print column_id[i]
-  #     print "\t"
-  #     print row.join("\t")
-  #     puts
-  #     # binding.pry
-  #   end
-  # end
-
-  #   #if computer_player makes choices, they will be stored

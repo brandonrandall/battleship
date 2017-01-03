@@ -1,5 +1,5 @@
-require './lib/computer_board'
 require './lib/grid'
+require './lib/computer_player'
 
 class PlayerOtherGrid
 
@@ -9,27 +9,24 @@ class PlayerOtherGrid
     attr_accessor :computer_grid
 
     def initialize
+      
       @computer_grid = Grid.new
     end
 
-    def start_talking
-      p "Ready to DIE?"
-    end
-
     def place_coordinate(coordinate)
-      @computer_grid.add_coordinate_to_grid("H", coordinate)
+      computer_grid.add_coordinate_to_grid("C", coordinate)
     end
 
     def place_ship1(coordinate)
-      @computer_grid.add_coordinate_to_grid("H", coordinate)
+      computer_grid.add_coordinate_to_grid("C", coordinate)
     end
 
     def place_ship2(coordinate)
-      @computer_grid.add_coordinate_to_grid("H", coordinate)
+      computer_grid.add_coordinate_to_grid("C", coordinate)
     end
 
-    def player_choice(coordinates)
-      @computer_grid.grid[coordinates]
+    def computer_choice(coordinates)
+      computer_grid.grid[coordinates]
     end
 
 end
