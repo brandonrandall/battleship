@@ -72,12 +72,22 @@ class ComputerPlayerTest < Minitest::Test
 
     cp_input = ['A1']
     player_input = ['C1']
-    
+
     player.computer_guess(cp_input)
     cp.player_guess(player_input)
 
     player.printable_enemy_grid
     cp.print_grid_of_computer
+  end
+
+  def test_horiz_placement_cant_overlap
+    cp = ComputerPlayer.new
+    horiz_array = [ "A1", "A2", "A3",
+                    "B1", "B2", "B3",
+                    "C1", "C2", "C3",
+                    "D1", "D2", "D3",
+                  ]
+    cp.long_horiz_placement(horiz_array)
   end
 
 end

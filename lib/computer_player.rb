@@ -101,14 +101,17 @@ class ComputerPlayer
   end
 
   def long_horiz_placement(horiz_array)
-    long_starting_point = horiz_array.sample
-    # until @computer_grid.grid[long_starting_point] == "-"
-    #   long_starting_point = horiz_array.sample
-    # end
-    # binding.pry
+    long_starting_point = horiz_array.index(horiz_array.sample)
+
+    until   @computer_grid.grid[long_starting_point] == "-" #&&
+            # @computer_grid.grid[long_starting_point + 1] == "-" &&
+            # @computer_grid.grid[long_starting_point + 2] == "-"
+      long_starting_point = horiz_array.index(horiz_array.sample)
+    end
+
     start_index = @base_array.index(long_starting_point)
 
-    placement_spots = [ @base_array[start_index],
+    placement_spots = [@base_array[start_index],
                         @base_array[start_index + 1],
                         @base_array[start_index + 2]]
     placement_spots.each do |e|
@@ -117,14 +120,16 @@ class ComputerPlayer
   end
 
   def long_vert_placement(vert_array)
-    long_starting_point = vert_array.sample
-    # until @computer_grid.grid[long_starting_point] == "-"
-    #   binding.pry
-    #   long_starting_point = vert_array.sample
-    # end
-    # binding.pry
+    long_starting_point = vert_array.index(vert_array.sample)
+    until   @computer_grid.grid[long_starting_point] == "-"# &&
+            # @computer_grid.grid[long_starting_point + 4] == "-" &&
+            # @computer_grid.grid[long_starting_point + 8] == "-"
+      long_starting_point = vert_array.index(vert_array.sample)
+    end
+    binding.pry
+
     start_index = @base_array.index(long_starting_point)
-    placement_spots = [ @base_array[start_index],
+    placement_spots = [@base_array[start_index],
                         @base_array[start_index + 4],
                         @base_array[start_index + 8]]
     placement_spots.each do |e|
